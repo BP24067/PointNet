@@ -1,0 +1,13 @@
+project-root/
+├── data/              # 生データ、加工済みデータ（Git管理対象外）
+├── docs/              # ドキュメント
+├── models/            # 学習済みモデルの重みファイル（.pth等）
+├── notebooks/         # Jupyter Notebookでの実験用
+├── scripts/           # 前処理や変換用の一発実行スクリプト
+├── src/               # アプリケーションのメインソースコード
+│   ├── components/    # 共通部品
+│   └── utils/         # 汎用関数（テンソル変換等）
+├── tests/             # ユニットテスト
+├── .gitignore         # Git追跡除外設定
+├── Dockerfile         # Docker環境定義
+└── requirements.txt   # ライブラリ依存関係
