@@ -1,0 +1,8 @@
+# 不要なデータやモデルを除外
+data/
+pointnet_model.pth
+
+# その他のキャッシュやログ
+__pycache__/
+*.pyc
+.DS_Store

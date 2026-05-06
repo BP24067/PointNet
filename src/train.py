@@ -1,7 +1,7 @@
 import torch
 import torch.nn as nn
 import models.pointnet as PN
-from datasets.processor import PointNetDataset
+from datasets.dataset import PointNetDataset
 from torch.utils.data import DataLoader
 
 
