@@ -19,6 +19,7 @@ PointNet/
 ├── scripts/            # Blenderを用いたデータ自動生成スクリプト
 ├── docs/               # 技術レポート（experiment_log.mdなど）
 └── README.md           # プロジェクトの説明書
+```
 
 ## Acknowledgments
 本プロジェクトのPointNetモデルの実装にあたり、以下の素晴らしい記事とリポジトリを参考に（リバースエンジニアリング）させていただきました。
