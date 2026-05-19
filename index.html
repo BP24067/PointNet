@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>PointNet 3D形状識別デモ</title>
+</head>
+<body>
+    <h1>PointNet 3D形状識別デモ（Cube vs Sphere）</h1>
+    <p>.ply ファイルをアップロードすると、自作PointNetが形状が何に近いかを判定します。</p>
+
+    <input type="file" id="plyFile" accept=".ply">
+    <button onclick="uploadFile()">AIで判定する</button>
+
+    <h2>判定結果:</h2>
+    <div id="result" style="font-size: 20px; font-weight: bold;">ファイルをアップロードしてください。</div>
+
+    <script>
+        async function uploadFile() {
+            const fileInput = document.getElementById('plyFile');
+            const resultDiv = document.getElementById('result');
+            
+            if (fileInput.files.length === 0) {
+                alert('PLYファイルを選択してください。');
+                return;
+            }
+
+            const file = fileInput.files[0];
+            // FormDataを使って.plyファイルを送信する準備
+            const formData = new FormData();
+            formData.append('file', file);
+
+            resultDiv.innerText = 'AIが判定中...';
+
+            try {
+                // FastAPIサーバーのURL（ポート8000）に向けて送信
+                const response = await fetch('http://localhost:8000/predict', {
+                    method: 'POST',
+                    body: formData
+                });
+                // エラーハンドリング(通信が成功したか)
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.detail || '判定に失敗しました。');
+                }
+                // サーバーからのレスポンスをJSONとして解析しdataに格納
+                const data = await response.json();
+                //resultDivに予測結果と確信度を表示させる
+                resultDiv.innerText = `予測: ${data.prediction} （確信度: ${data.confidence.toFixed(3)}%）`;
+
+            } catch (error) {
+                resultDiv.innerText = `エラー: ${error.message}`;
+            }
+        }
+    </script>
+</body>
+</html>

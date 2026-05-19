@@ -1,3 +1,6 @@
 torch
 numpy
 trimesh
+fastapi
+uvicorn
+python-multipart
